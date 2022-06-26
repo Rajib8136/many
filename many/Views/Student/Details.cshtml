@@ -1,0 +1,33 @@
+﻿@model IEnumerable<many.Models.Course>
+@{ 
+    ViewData["Title"] = "Details";
+    string StudentName = "";
+}
+
+<h1> Details </h1>
+<table class="table">
+     <thead>
+         <tr>
+             <th>@Html.DisplayNameFor(c => c.Name)</th>
+             <th>StudentName</th>
+         </tr>
+     </thead>
+    <tbody>
+        @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(c => item.Name)</td>
+                    <td>
+                        @{ 
+                            StudentName = "";
+                            @foreach(var item1 in item.StudentCourses)
+                            {
+                                StudentName += (item1?.Student.Name + " , ");
+                            }
+                        }
+                        @StudentName
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>

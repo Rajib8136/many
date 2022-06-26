@@ -1,0 +1,60 @@
+﻿@model IEnumerable<many.Models.Student>
+
+@{ 
+    ViewData["Title"] = "Index";
+    string CourseName = "";
+    string ExamName = "";
+    string GradeName = "";
+}
+
+<h1> Index </h1>
+<a asp-action="Create" class="btn btn-success"> Create Here</a>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Address)</th>
+            <th>CourseName</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(c => item.Name)</td>
+                    <td>@Html.DisplayFor(c => item.Address)</td>
+                    <td>
+                        @{ 
+                            CourseName = "";
+                            @foreach(var item1 in item.StudentCourses)
+                            {
+                                CourseName += ( item1?.Course.Name +" , ") ;
+                            }
+                        }
+                        @CourseName
+                    </td>
+                    @*<td>
+                        @{ 
+                            ExamName = "";
+                            GradeName = "";
+                            @foreach(var item2 in item.ExamCourses)
+                            {
+                                ExamName += (item2?.Exam.ExamName + " , ");
+                                GradeName += (item2?.Exam.GradeName + " , ");
+                            }
+                        }
+                        @ExamName
+                        @GradeName
+                    </td>*@
+                    <td>
+                        <a asp-action="Update" class="btn btn-success" asp-route-id="@item.Id"> Update </a> |
+                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id"> Delete </a>|
+                        <a asp-action="Details" class="btn btn-dark" asp-route-id="@item.Id"> Details</a>
+
+
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>

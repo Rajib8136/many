@@ -1,0 +1,44 @@
+﻿@model IEnumerable<many.ViewModel.StudentViewModel>
+@{
+    ViewData["Title"] = "GetStudentList";
+}
+<div>
+    @foreach (var item in Model)
+    {
+
+        <div class="form-group">
+            <label asp-for="@item.Name" class="control-label"></label>
+            <input asp-for="@item.Name" class="form-control" disabled />
+            <span asp-validation-for="@item.Name" class="text-danger"></span>
+
+
+
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@item.Address" class="control-label"></label>
+            <input asp-for="@item.Address" class="form-control" disabled />
+            <span asp-validation-for="@item.Address" class="text-danger"></span>
+
+
+
+        </div>
+        <div class="form-group">
+            @for (var i = 0; i < item.courseViewModels.Count; i++)
+            {
+                <div class="checkbox-inline">
+                    <input type="checkbox" asp-for="@item.courseViewModels[i].IsChecked" disabled />
+                    <input type="hidden" asp-for="@item.courseViewModels[i].Name" />
+                    <input type="hidden" asp-for="@item.courseViewModels[i].Id" />
+                    <label asp-for="@item.courseViewModels[i].IsChecked">@item.courseViewModels[i].Name</label>
+                </div>
+
+            }
+        </div>
+    }
+</div>
+
+
+
+
+

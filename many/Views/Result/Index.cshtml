@@ -1,0 +1,55 @@
+﻿@model IEnumerable<many.ViewModel.StudentViewModel>
+@{ 
+    ViewData["title"] = "Index";
+    string CourseName = "";
+    string ExamName = "";
+    string GradeName = "";
+}
+
+<h1> Index </h1>
+<a asp-action="Create" class="btn btn-success"> Create Here</a>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(c => c.Name)</th>
+            <th>@Html.DisplayNameFor(c => c.Address)</th>
+            <th> CourseName</th>
+            <th> ExamName</th>
+            <th>GradeName</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(c => item.Name)</td>
+                    <td>@Html.DisplayFor(c => item.Address)</td>
+                    <td>
+                        @{ 
+                            CourseName = "";
+                            @foreach( var item1 in item.courseViewModels)
+                            {
+                                CourseName += (item1?.Name + ", ");
+                            }
+                        }
+                        @CourseName;
+                    </td>
+                    <td>
+                        @{ 
+                            ExamName = "";
+                            GradeName = "";
+                            @foreach(var item2 in item.ExamViewModels)
+                            {
+                                ExamName += (item2.ExamName + " ,");
+                                GradeName += (item2.GradeName + " ,");
+
+                            }
+                        }
+                        @ExamName;
+                        @GradeName;
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>
